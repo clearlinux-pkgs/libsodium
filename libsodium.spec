@@ -4,7 +4,7 @@
 #
 Name     : libsodium
 Version  : 1.0.3
-Release  : 3
+Release  : 4
 URL      : https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz
 Source0  : https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz
 Summary  : A portable, cross-compilable, installable, packageable fork of NaCl, with a compatible API.
