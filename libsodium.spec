@@ -4,7 +4,7 @@
 #
 Name     : libsodium
 Version  : 1.0.10
-Release  : 10
+Release  : 11
 URL      : https://download.libsodium.org/libsodium/releases/libsodium-1.0.10.tar.gz
 Source0  : https://download.libsodium.org/libsodium/releases/libsodium-1.0.10.tar.gz
 Summary  : A modern and easy-to-use crypto library
