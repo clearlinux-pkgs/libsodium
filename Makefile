@@ -1,5 +1,5 @@
 PKG_NAME := libsodium
-URL := https://download.libsodium.org/libsodium/releases/libsodium-1.0.10.tar.gz
-ARCHIVES :=
+URL = https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz
+ARCHIVES = 
 
 include ../common/Makefile.common
