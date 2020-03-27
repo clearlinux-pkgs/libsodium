@@ -6,7 +6,7 @@
 #
 Name     : libsodium
 Version  : 1.0.17
-Release  : 13
+Release  : 14
 URL      : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz
 Source0  : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz
 Source99 : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz.sig
