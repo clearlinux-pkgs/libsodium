@@ -6,16 +6,17 @@
 #
 Name     : libsodium
 Version  : 1.0.17
-Release  : 14
+Release  : 15
 URL      : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz
 Source0  : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz
-Source99 : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz.sig
+Source1  : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz.sig
 Summary  : A modern and easy-to-use crypto library
 Group    : Development/Tools
 License  : ISC
 Requires: libsodium-lib = %{version}-%{release}
 Requires: libsodium-license = %{version}-%{release}
 BuildRequires : llvm
+BuildRequires : llvm-dev
 
 %description
 [![Build Status](https://travis-ci.org/jedisct1/libsodium.svg?branch=master)](https://travis-ci.org/jedisct1/libsodium?branch=master)
@@ -27,6 +28,7 @@ Summary: dev components for the libsodium package.
 Group: Development
 Requires: libsodium-lib = %{version}-%{release}
 Provides: libsodium-devel = %{version}-%{release}
+Requires: libsodium = %{version}-%{release}
 
 %description dev
 dev components for the libsodium package.
@@ -51,29 +53,34 @@ license components for the libsodium package.
 
 %prep
 %setup -q -n libsodium-1.0.17
+cd %{_builddir}/libsodium-1.0.17
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1550689410
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604610311
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1550689410
+export SOURCE_DATE_EPOCH=1604610311
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libsodium
-cp LICENSE %{buildroot}/usr/share/package-licenses/libsodium/LICENSE
+cp %{_builddir}/libsodium-1.0.17/LICENSE %{buildroot}/usr/share/package-licenses/libsodium/d3d81d32b0e1c11e180faffe1c9f1fedc7d04f58
 %make_install
 
 %files
@@ -81,7 +88,7 @@ cp LICENSE %{buildroot}/usr/share/package-licenses/libsodium/LICENSE
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/sodium.h
 /usr/include/sodium/core.h
 /usr/include/sodium/crypto_aead_aes256gcm.h
 /usr/include/sodium/crypto_aead_chacha20poly1305.h
@@ -152,4 +159,4 @@ cp LICENSE %{buildroot}/usr/share/package-licenses/libsodium/LICENSE
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libsodium/LICENSE
+/usr/share/package-licenses/libsodium/d3d81d32b0e1c11e180faffe1c9f1fedc7d04f58
