@@ -5,23 +5,23 @@
 # Source0 file verified with key 0x62F25B592B6F76DA (github@pureftpd.org)
 #
 Name     : libsodium
-Version  : 1.0.17
-Release  : 15
-URL      : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz
-Source0  : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz
-Source1  : https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz.sig
+Version  : 1.0.18
+Release  : 16
+URL      : https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz
+Source0  : https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz
+Source1  : https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz.sig
 Summary  : A modern and easy-to-use crypto library
 Group    : Development/Tools
 License  : ISC
 Requires: libsodium-lib = %{version}-%{release}
 Requires: libsodium-license = %{version}-%{release}
 BuildRequires : llvm
-BuildRequires : llvm-dev
 
 %description
 [![Build Status](https://travis-ci.org/jedisct1/libsodium.svg?branch=master)](https://travis-ci.org/jedisct1/libsodium?branch=master)
 [![Windows build status](https://ci.appveyor.com/api/projects/status/fu8s2elx25il98hj?svg=true)](https://ci.appveyor.com/project/jedisct1/libsodium)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/2397/badge.svg)](https://scan.coverity.com/projects/2397)
+[![Azure build status](https://jedisct1.visualstudio.com/Libsodium/_apis/build/status/jedisct1.libsodium?branchName=stable)](https://jedisct1.visualstudio.com/Libsodium/_build/latest?definitionId=3&branchName=stable)
 
 %package dev
 Summary: dev components for the libsodium package.
@@ -52,15 +52,15 @@ license components for the libsodium package.
 
 
 %prep
-%setup -q -n libsodium-1.0.17
-cd %{_builddir}/libsodium-1.0.17
+%setup -q -n libsodium-1.0.18
+cd %{_builddir}/libsodium-1.0.18
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604610311
+export SOURCE_DATE_EPOCH=1645040507
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -77,10 +77,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1604610311
+export SOURCE_DATE_EPOCH=1645040507
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libsodium
-cp %{_builddir}/libsodium-1.0.17/LICENSE %{buildroot}/usr/share/package-licenses/libsodium/d3d81d32b0e1c11e180faffe1c9f1fedc7d04f58
+cp %{_builddir}/libsodium-1.0.18/LICENSE %{buildroot}/usr/share/package-licenses/libsodium/d3d81d32b0e1c11e180faffe1c9f1fedc7d04f58
 %make_install
 
 %files
@@ -103,6 +103,7 @@ cp %{_builddir}/libsodium-1.0.17/LICENSE %{buildroot}/usr/share/package-licenses
 /usr/include/sodium/crypto_core_ed25519.h
 /usr/include/sodium/crypto_core_hchacha20.h
 /usr/include/sodium/crypto_core_hsalsa20.h
+/usr/include/sodium/crypto_core_ristretto255.h
 /usr/include/sodium/crypto_core_salsa20.h
 /usr/include/sodium/crypto_core_salsa2012.h
 /usr/include/sodium/crypto_core_salsa208.h
@@ -123,6 +124,7 @@ cp %{_builddir}/libsodium-1.0.17/LICENSE %{buildroot}/usr/share/package-licenses
 /usr/include/sodium/crypto_scalarmult.h
 /usr/include/sodium/crypto_scalarmult_curve25519.h
 /usr/include/sodium/crypto_scalarmult_ed25519.h
+/usr/include/sodium/crypto_scalarmult_ristretto255.h
 /usr/include/sodium/crypto_secretbox.h
 /usr/include/sodium/crypto_secretbox_xchacha20poly1305.h
 /usr/include/sodium/crypto_secretbox_xsalsa20poly1305.h
@@ -144,7 +146,7 @@ cp %{_builddir}/libsodium-1.0.17/LICENSE %{buildroot}/usr/share/package-licenses
 /usr/include/sodium/crypto_verify_64.h
 /usr/include/sodium/export.h
 /usr/include/sodium/randombytes.h
-/usr/include/sodium/randombytes_salsa20_random.h
+/usr/include/sodium/randombytes_internal_random.h
 /usr/include/sodium/randombytes_sysrandom.h
 /usr/include/sodium/runtime.h
 /usr/include/sodium/utils.h
@@ -155,7 +157,7 @@ cp %{_builddir}/libsodium-1.0.17/LICENSE %{buildroot}/usr/share/package-licenses
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libsodium.so.23
-/usr/lib64/libsodium.so.23.2.0
+/usr/lib64/libsodium.so.23.3.0
 
 %files license
 %defattr(0644,root,root,0755)
